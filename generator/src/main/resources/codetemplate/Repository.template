@@ -1,0 +1,13 @@
+package @Package@;
+
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.CrudRepository;
+
+import @ModelPath@;
+
+/**
+ * @Model@Repository
+ */
+public interface @Model@Repository extends CrudRepository<@Model@, Long>, QuerydslPredicateExecutor<@Model@> {
+
+}

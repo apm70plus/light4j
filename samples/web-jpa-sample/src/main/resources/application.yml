@@ -1,0 +1,40 @@
+spring:
+  profiles.active: dev,swagger
+  application.name: web-sample
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:demo_db;MVCC=TRUE;LOCK_TIMEOUT=10000
+    username: sa
+    password: 
+    test-while-idle: true
+    max-wait-millis: 30000
+    validation-query: 'SELECT 1'
+    time-between-eviction-runs-millis: 20000
+    min-evictable-idle-time-millis: 28700
+  jpa: 
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+server:
+  port: 8080
+
+light: 
+  web:
+    swagger: # Swagger动态接口文档配置
+      title: WebMVC API # 文档标题
+      description: WEB API documentation # 文档描述
+      version: 1.0.0 # API版本号
+      #termsOfServiceUrl: # 服务条款访问地址
+      #contactName: # 联系人
+      #contactUrl:  # 联系地址
+      #contactEmail: # 联系邮箱
+      #license:
+      #licenseUrl: 
+      pathPatterns: # API 路径匹配表达式, 列表方式
+        - /**
+        #- /web/**
+        #- /mobile/**
+        
