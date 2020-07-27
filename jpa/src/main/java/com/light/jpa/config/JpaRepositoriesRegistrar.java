@@ -23,7 +23,7 @@ import org.springframework.data.repository.config.RepositoryBeanDefinitionRegist
 import org.springframework.data.repository.config.RepositoryConfigurationExtension;
 
 /**
- * {@link ImportBeanDefinitionRegistrar} to enable {@link EnableFrameworkJpa} annotation.
+ * {@link ImportBeanDefinitionRegistrar} to enable {@link EnableJpaExtra} annotation.
  *
  * @author Oliver Gierke
  */
@@ -35,7 +35,7 @@ class JpaRepositoriesRegistrar extends RepositoryBeanDefinitionRegistrarSupport 
 	 */
 	@Override
 	protected Class<? extends Annotation> getAnnotation() {
-		return EnableFrameworkJpa.class;
+		return EnableJpaExtra.class;
 	}
 
 	/*

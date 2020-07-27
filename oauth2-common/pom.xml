@@ -9,7 +9,7 @@
 		<relativePath>../</relativePath>
 	</parent>
 	<artifactId>oauth2-common</artifactId>
-	<name>Auth Common</name>
+	<name>OAuth2 Common</name>
 	<description></description>
 	<packaging>jar</packaging>
 

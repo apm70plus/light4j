@@ -15,15 +15,7 @@
  */
 package com.light.jpa.config;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.persistence.EntityManagerFactory;
-
+import com.light.jpa.repository.support.GenericJpaRepositoryFactoryBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
@@ -35,7 +27,8 @@ import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.data.repository.query.QueryLookupStrategy.Key;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.light.jpa.repository.support.GenericJpaRepositoryFactoryBean;
+import javax.persistence.EntityManagerFactory;
+import java.lang.annotation.*;
 
 /**
  * Annotation to enable JPA repositories. Will scan the package of the annotated configuration class for Spring Data
@@ -49,7 +42,7 @@ import com.light.jpa.repository.support.GenericJpaRepositoryFactoryBean;
 @Documented
 @Inherited
 @Import(JpaRepositoriesRegistrar.class)
-public @interface EnableFrameworkJpa {
+public @interface EnableJpaExtra {
 
 	/**
 	 * Alias for the {@link #basePackages()} attribute. Allows for more concise annotation declarations e.g.:
