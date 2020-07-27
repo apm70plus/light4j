@@ -12,4 +12,8 @@ public class LoginSuccessDTO {
 	 * 用户名
 	 */
 	private String username;
+	/**
+	 * token
+	 */
+	private Object token;
 }

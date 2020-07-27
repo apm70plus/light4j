@@ -1,15 +1,15 @@
 package com.light.auth.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
-@Component
-@ConfigurationProperties(prefix = "framework.auth")
+@ConfigurationProperties(prefix = "light.auth")
 public class ShiroAuthProperties {
 
 	// 认证类型：session，accessToken，jwtToken
@@ -20,6 +20,8 @@ public class ShiroAuthProperties {
 	private JwtProperties jwt = new JwtProperties();
 	// redis 配置
 	private RedisProperties redis = new RedisProperties();
+	// 路径白名单
+	private Set<String> pathWhiteList = new HashSet<>();
 	
 	public static class RedisProperties {
 		@Getter@Setter

@@ -1,1 +1,9 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.light.auth.config.ShiroAuthAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.light.auth.config.jwt.ShiroJwtTokenAutoConfiguration,\
+com.light.auth.config.token.ShiroAccessTokenCacheConfiguration,\
+com.light.auth.config.token.ShiroAccessTokenAutoConfiguration,\
+com.light.auth.config.session.ShiroSessionAutoConfiguration,\
+com.light.auth.config.web.ShiroBeanAutoConfiguration,\
+com.light.auth.config.web.ShiroAnnotationProcessorAutoConfiguration,\
+com.light.auth.config.web.ShiroWebAutoConfiguration,\
+com.light.auth.config.web.ShiroWebFilterConfiguration

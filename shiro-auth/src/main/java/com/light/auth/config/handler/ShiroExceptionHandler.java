@@ -1,7 +1,8 @@
-package com.light.auth.config;
+package com.light.auth.config.handler;
 
-import javax.servlet.ServletException;
-
+import com.light.web.response.ResponseError;
+import com.light.web.response.RestResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
@@ -13,10 +14,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.light.web.response.ResponseError;
-import com.light.web.response.RestResponse;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.ServletException;
 
 @Slf4j
 @RestControllerAdvice
