@@ -1,0 +1,38 @@
+spring:
+  profiles.active: dev,swagger
+  application.name: web-sample
+
+server:
+  port: 8080
+
+light: 
+  web:
+    swagger: # Swagger动态接口文档配置
+      title: WebMVC API # 文档标题
+      description: WEB API documentation # 文档描述
+      version: 1.0.0 # API版本号
+      #termsOfServiceUrl: # 服务条款访问地址
+      #contactName: # 联系人
+      #contactUrl:  # 联系地址
+      #contactEmail: # 联系邮箱
+      #license:
+      #licenseUrl: 
+      pathPatterns: # API 路径匹配表达式, 列表方式
+        - /**
+        #- /web/**
+        #- /mobile/**
+
+  # 登录认证配置
+  auth:
+    #type: session
+
+    #type: accessToken
+    #tokenExpire: 1800
+
+    type: jwtToken
+    tokenExpire: 1800
+    jwt.secret: xfwlejse
+
+    login:
+      max_retry_times: 5
+      lock_expired_minutes: 2
