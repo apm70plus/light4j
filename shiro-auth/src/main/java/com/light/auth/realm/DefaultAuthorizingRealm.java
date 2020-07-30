@@ -1,9 +1,10 @@
 package com.light.auth.realm;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
+import com.light.auth.bean.AuthorizationBean;
+import com.light.auth.bean.LoginUser;
+import com.light.auth.bean.UsernamePasswordToken;
+import com.light.auth.service.AuthenticationService;
+import com.light.auth.service.AuthorizationService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,15 +12,15 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.MutablePrincipalCollection;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import com.light.auth.bean.AuthorizationBean;
-import com.light.auth.bean.LoginUser;
-import com.light.auth.service.AuthenticationService;
-import com.light.auth.service.AuthorizationService;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * 认证的默认实现类
@@ -60,6 +61,9 @@ public class DefaultAuthorizingRealm extends AuthorizingRealm {
 			SimplePrincipalCollection principal = new SimplePrincipalCollection();
 			principal.add(user, "LoginUser");
 			principal.add(authcToken.getPrincipal(), "Principal");
+			if (authcToken instanceof UsernamePasswordToken) {
+				applySupportedPrincipals(principal);
+			}
 			return new SimpleAuthenticationInfo(principal, authcToken.getCredentials());
 		} else {
 			throw new AuthenticationException();
@@ -69,6 +73,10 @@ public class DefaultAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	public boolean supports(AuthenticationToken authcToken) {
 		return getAuthenticationServices().keySet().stream().anyMatch(c -> c.isAssignableFrom(authcToken.getClass()));
+	}
+
+	private void applySupportedPrincipals(MutablePrincipalCollection principalCollection) {
+		getAuthenticationServices().values().forEach(s -> s.onAuthenticationSuccess(principalCollection));
 	}
 
 	private AuthenticationService getAuthenticationService(AuthenticationToken authcToken) {

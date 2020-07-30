@@ -35,7 +35,7 @@ public class ShiroWebFilterConfiguration {
     protected String loginUrl;
     @Value("${light.auth.successUrl:/}")
     protected String successUrl;
-    @Autowired
+    @Autowired(required = false)
     protected List<ShiroFilterRegistrationBean> filterRegistrationBeanList;
     @Autowired
     protected SecurityManager securityManager;
@@ -57,7 +57,9 @@ public class ShiroWebFilterConfiguration {
             filterChainMap.put(path, "anon");
         }
         filterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
-        filterRegistrationBeanList.forEach(registry -> registry.register(filterFactoryBean));
+        if (filterRegistrationBeanList != null) {
+            filterRegistrationBeanList.forEach(registry -> registry.register(filterFactoryBean));
+        }
 
         return filterFactoryBean;
     }

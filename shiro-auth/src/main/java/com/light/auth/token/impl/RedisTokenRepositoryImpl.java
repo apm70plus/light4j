@@ -9,11 +9,11 @@ public class RedisTokenRepositoryImpl implements TokenRepository {
 
 	private StringRedisTemplate stringRedisTemplate;
 
-	private int expirSeconds;
+	private int expireSeconds;
 	
-	public RedisTokenRepositoryImpl(StringRedisTemplate stringRedisTemplate, int expirSeconds) {
+	public RedisTokenRepositoryImpl(StringRedisTemplate stringRedisTemplate, int expireSeconds) {
 		this.stringRedisTemplate = stringRedisTemplate;
-		this.expirSeconds = expirSeconds;
+		this.expireSeconds = expireSeconds;
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class RedisTokenRepositoryImpl implements TokenRepository {
 
 	@Override
 	public void put(String token, String value) {
-		this.stringRedisTemplate.opsForValue().set(token, value, Duration.ofSeconds(expirSeconds));
+		this.stringRedisTemplate.opsForValue().set(token, value, Duration.ofSeconds(expireSeconds));
 	}
 
 	@Override
