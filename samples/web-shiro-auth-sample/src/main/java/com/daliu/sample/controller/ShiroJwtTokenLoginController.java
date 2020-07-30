@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 基于JwtToken的认证方式
+ */
 @RestController
-public class ShiroJwtLoginController {
+@ConditionalOnProperty(name = "light.auth.type", havingValue = "jwtToken", matchIfMissing = false)
+public class ShiroJwtTokenLoginController {
 	
 	@Autowired
 	private JwtTokenService jwtTokenService;
@@ -39,16 +44,6 @@ public class ShiroJwtLoginController {
 		dto.setToken(jwtToken);
 		
 		return RestResponse.success(dto);
-	}
-	
-	@GetMapping(value="/test", produces = "application/json")
-	public RestResponse<String> testGet() {
-		return RestResponse.success("hello " + LoginUserUtils.getLoginUser().getName());
-	}
-	
-	@PostMapping(value="/test", produces = "application/json")
-	public RestResponse<String> testPost() {
-		return RestResponse.success("hello " + LoginUserUtils.getLoginUser().getName());
 	}
 	
 	@GetMapping(value="/unauthenticated", produces = "application/json")

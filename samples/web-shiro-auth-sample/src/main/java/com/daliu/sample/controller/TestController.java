@@ -1,21 +1,21 @@
 package com.daliu.sample.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.light.exception.BusinessException;
+import com.light.auth.util.LoginUserUtils;
 import com.light.web.response.RestResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
-	@GetMapping("/hello")
-	public RestResponse<String> hello() {
-		return RestResponse.success("world!");
+	@GetMapping(value="/test", produces = "application/json")
+	public RestResponse<String> testGet() {
+		return RestResponse.success("hello " + LoginUserUtils.getLoginUser().getName());
 	}
-	
-	@GetMapping("/exception")
-	public RestResponse<String> exception() {
-		throw new BusinessException("业务异常，数据不合法！");
+
+	@PostMapping(value="/test", produces = "application/json")
+	public RestResponse<String> testPost() {
+		return RestResponse.success("hello " + LoginUserUtils.getLoginUser().getName());
 	}
 }

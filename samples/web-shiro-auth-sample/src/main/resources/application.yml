@@ -24,14 +24,15 @@ light:
 
   # 登录认证配置
   auth:
-    #type: session
+    type: session
 
     #type: accessToken
     #tokenExpire: 1800
+    #tokenStore: hazelcast
 
-    type: jwtToken
-    tokenExpire: 1800
-    jwt.secret: xfwlejse
+    #type: jwtToken
+    #tokenExpire: 1800
+    #jwt.secret: xfwlejse
 
     login:
       max_retry_times: 5
